@@ -1,16 +1,16 @@
-import { Container, Flex, HStack, Text, Button, Icon } from "@chakra-ui/react"
+import { Container, Flex, HStack, Text, Button } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 import { FaRegSquarePlus } from "react-icons/fa6"
 import { useColorMode } from "./ui/color-mode"
 import { IoMoon } from "react-icons/io5"
 import { LuSun } from "react-icons/lu"
-import { FaCartShopping } from "react-icons/fa6"
+import { useProductStore } from "@/store/product"
 
 const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode(); // this is a hook from chakraUI
 
   return (
-    <Container maxW="1140px" px={4}>
+    <Container maxW={"1140px"} px={4}>
       <Flex
         h={16}
         alignItems={"center"}
@@ -21,7 +21,7 @@ const Navbar = () => {
         }}
       >
         <Text
-          fontSize={{ base: "22", sm: "28"}}
+          fontSize={{ base: "22px", sm: "28px"}}
           fontWeight={"bold"}
           textTransform={"uppercase"}
           textAlign={"center"}
@@ -30,7 +30,7 @@ const Navbar = () => {
           gradientTo="blue.500"
           bgClip={"text"}
         >
-          <Link to={"/"}>Product Store🛒</Link>
+          <Link to={"/"}>Product Store 🛒</Link>
         </Text>
 
         <HStack alignItems={"center"}>

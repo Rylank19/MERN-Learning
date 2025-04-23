@@ -1,6 +1,6 @@
 import { useProductStore } from '@/store/product';
-import { Container, VStack, Text, SimpleGrid, Box } from '@chakra-ui/react'
-import React, { useEffect } from 'react'
+import { Container, VStack, Text, SimpleGrid } from '@chakra-ui/react'
+import { useEffect } from 'react'
 import { Link } from "react-router-dom"
 import ProductCard from '@/components/ProductCard';
 

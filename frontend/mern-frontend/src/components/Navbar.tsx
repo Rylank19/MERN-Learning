@@ -4,7 +4,6 @@ import { FaRegSquarePlus } from "react-icons/fa6"
 import { useColorMode } from "./ui/color-mode"
 import { IoMoon } from "react-icons/io5"
 import { LuSun } from "react-icons/lu"
-import { useProductStore } from "@/store/product"
 
 const Navbar = () => {
   const { colorMode, toggleColorMode } = useColorMode(); // this is a hook from chakraUI

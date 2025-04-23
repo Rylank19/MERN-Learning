@@ -1,19 +1,18 @@
 import { Box, Heading, HStack, IconButton, Image, Text } from '@chakra-ui/react';
-import React from 'react' // rafce to autocomplete setup
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBin6Fill } from "react-icons/ri";
 import { useColorModeValue } from './ui/color-mode';
-import { useProductStore } from '@/store/product';
+import { Product, useProductStore } from '@/store/product';
 import { Toaster, toaster } from '@/components/ui/toaster';
 import { Modal } from './Modal';
 
-const ProductCard = ({product}) => {
+const ProductCard = ({product} : {product : Product}) => {
     const textColor = useColorModeValue("gray.600", "gray.200");
     const bg = useColorModeValue("white", "gray.800");
 
     const {deleteProduct}=useProductStore();
 
-    const handleDeleteProduct = async (pid) => {
+    const handleDeleteProduct = async (pid : string) => {
         const {success, message} = await deleteProduct(pid);
         if (!success) {
         toaster.create({

@@ -2,10 +2,31 @@ import {create} from "zustand"
 
 // this file essentially connects to our backend methods to manipulate data on the server
 
-export const useProductStore = create((set) => ({
+export interface Product {
+    name: string;
+    image: string;
+    price: number;
+    _id: string;
+}
+
+interface Response {
+    success: boolean;
+    message: string;
+}
+
+interface MyState {
+    products : Product[],
+    setProducts: (products: []) => void,
+    createProduct: (newProduct: {name: string; image: string; price: string;}) => Promise<Response>,
+    fetchProducts: () => Promise<void>,
+    deleteProduct: (pid: string) => Promise<Response>,
+    updateProduct: (updatedProduct : Product, pid: string) => Promise<Response>
+}
+
+export const useProductStore = create<MyState>((set) => ({
     products: [],
-    setProducts: (products : string[]) => set({ products }),
-    createProduct: async (newProduct: { name: any; image: any; price: any; }) => {
+    setProducts: (products: []) => set({ products }),
+    createProduct: async (newProduct) => {
         if (!newProduct.name || !newProduct.image || !newProduct.price) {
             return {success:false, message:"Please fill in all fields."}
         }
@@ -36,7 +57,7 @@ export const useProductStore = create((set) => ({
         set((state) => ({products: state.products.filter(product => product._id !== pid)}));
         return { success: true, message: data.message};
     },
-    updateProduct: async (updatedProduct: { name: any; image: any; price: any; }, pid) => {
+    updateProduct: async (updatedProduct, pid) => {
         const res = await fetch(`/api/products/${pid}`, {
             method: "PUT",
             headers: {

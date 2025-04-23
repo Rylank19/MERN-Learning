@@ -1,13 +1,15 @@
-import { useProductStore } from "@/store/product";
+import { Product, useProductStore } from "@/store/product";
 import { Button, CloseButton, Dialog, Input, Portal, VStack } from "@chakra-ui/react"
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { Toaster, toaster } from "./ui/toaster";
-import { useColorModeValue } from "./ui/color-mode";
 
-export const Modal = ({ children, product }) => {
+interface Props {
+    children?: ReactNode,
+    product: Product
+}
+
+export const Modal = ({ children, product } : Props) => {
     const [updatedProduct, setUpdatedProduct] = useState(product);
-
-    const bg = useColorModeValue("white", "gray.800");
 
     const {updateProduct} = useProductStore();
     const handleUpdateProduct = async () => {
@@ -60,7 +62,7 @@ export const Modal = ({ children, product }) => {
                     name="price"
                     type="number"
                     value={updatedProduct.price} // link to new product above
-                    onChange={(e) => setUpdatedProduct({ ...updatedProduct, price: e.target.value}) }
+                    onChange={(e) => setUpdatedProduct({ ...updatedProduct, price: +e.target.value}) }
                 />
                 <Input
                     placeholder="Image URL"
